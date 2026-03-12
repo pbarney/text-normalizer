@@ -10,8 +10,14 @@ use TextNormalizer\Factory\TextNormalizerFactory;
 use Dotenv\Dotenv;
 
 // Load the environment variables (OPENAI_API_KEY, etc) from the environment
-$dotenv = Dotenv::createImmutable(__DIR__ . "\..");
+// Make sure you've renamed `.env.example` to `.env` and added your OPENAI_API_KEY to it.
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+try {
 $dotenv->load();
+} catch (\Dotenv\Exception\InvalidPathException $e) {
+    echo $e->getMessage() . PHP_EOL;
+    exit(1);
+}
 
 $psr17Factory = new Psr17Factory();
 
