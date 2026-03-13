@@ -25,7 +25,7 @@ $config = new NormalizerConfig(
     openAiApiKey: $openAiApiKey,
     openAiModel: 'gpt-4o-mini',
     minAiLength: 120,
-    minAmbiguitySignals: 2,
+    minAmbiguityFactors: 2,
     maxLengthDeltaRatio: 0.35,
 );
 
@@ -65,9 +65,9 @@ foreach ($collectionResult->results() as $key => $result) {
     echo 'Model: ' . ($result->model() ?? '(none)') . PHP_EOL;
     echo 'Reason: ' . $result->reason() . PHP_EOL;
 
-    $signals = $result->signals();
-    if ($signals !== []) {
-        echo 'Signals: ' . implode(', ', $signals) . PHP_EOL;
+    $factors = $result->factors();
+    if ($factors !== []) {
+        echo 'Fators: ' . implode(', ', $factors) . PHP_EOL;
     }
 
     echo 'Original: ' . $result->original() . PHP_EOL;

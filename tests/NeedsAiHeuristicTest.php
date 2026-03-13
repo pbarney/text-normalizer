@@ -24,7 +24,7 @@ final class NeedsAiHeuristicTest extends TestCase
 
     public function testAmbiguousLongTextUsesAi(): void
     {
-        $heuristic = new NeedsAiHeuristic(new NormalizerConfig(minAiLength: 20, minAmbiguitySignals: 2));
+        $heuristic = new NeedsAiHeuristic(new NormalizerConfig(minAiLength: 20, minAmbiguityFactors: 2));
 
         $decision = $heuristic->decide(
             'Whether You Need A Building Demolished OR Want To Rent A Dumpster For A Cleanup, Fancy Pants Hauling & Dumpster Rental Is The Company For You.',
@@ -36,6 +36,6 @@ final class NeedsAiHeuristicTest extends TestCase
         );
 
         self::assertTrue($decision->shouldUseAi);
-        self::assertContains('protected_phrases_context', $decision->signals);
+        self::assertContains('protected_phrases_context', $decision->factors);
     }
 }

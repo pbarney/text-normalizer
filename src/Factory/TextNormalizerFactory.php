@@ -33,7 +33,7 @@ final class TextNormalizerFactory
             openAiApiKey: Env::get('OPENAI_API_KEY', '') ?? '',
             openAiModel: Env::get('TEXT_NORMALIZER_OPENAI_MODEL', 'gpt-4o-mini') ?? 'gpt-4o-mini',
             minAiLength: Env::int('TEXT_NORMALIZER_MIN_AI_LENGTH', 120),
-            minAmbiguitySignals: Env::int('TEXT_NORMALIZER_MIN_AMBIGUITY_SIGNALS', 2),
+            minAmbiguityFactors: Env::int('TEXT_NORMALIZER_MIN_AMBIGUITY_FACTORS', 2),
             maxLengthDeltaRatio: Env::float('TEXT_NORMALIZER_MAX_LENGTH_DELTA_RATIO', 0.35),
         );
 

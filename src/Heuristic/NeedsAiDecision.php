@@ -7,12 +7,12 @@ namespace TextNormalizer\Heuristic;
 final class NeedsAiDecision
 {
     /**
-     * @param list<string> $signals
+     * @param list<string> $factors
      */
     public function __construct(
         public readonly bool $shouldUseAi,
         public readonly string $reason,
-        public readonly array $signals = [],
+        public readonly array $factors = [],
     ) {
     }
 }

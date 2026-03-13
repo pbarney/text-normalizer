@@ -13,7 +13,7 @@ final class NormalizerConfig
         public readonly string $openAiApiKey = '',
         public readonly string $openAiModel = 'gpt-4o-mini',
         public readonly int $minAiLength = 120,
-        public readonly int $minAmbiguitySignals = 2,
+        public readonly int $minAmbiguityFactors = 2,
         public readonly float $maxLengthDeltaRatio = 0.35,
     ) {
     }

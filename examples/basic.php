@@ -25,7 +25,7 @@ $config = new NormalizerConfig(
     openAiApiKey: $openAiApiKey,
     openAiModel: 'gpt-4o-mini',
     minAiLength: 120,
-    minAmbiguitySignals: 2,
+    minAmbiguityFactors: 2,
     maxLengthDeltaRatio: 0.35,
 );
 
@@ -57,12 +57,12 @@ printf(
     $result->reason(),
 );
 
-$signals = $result->signals();
+$factors = $result->factors();
 
-if ($signals !== []) {
-    echo PHP_EOL . "SIGNALS:" . PHP_EOL;
+if ($factors !== []) {
+    echo PHP_EOL . "FACTORS:" . PHP_EOL;
 
-    foreach ($signals as $signal) {
-        echo "- {$signal}" . PHP_EOL;
+    foreach ($factors as $factor) {
+        echo "- {$factor}" . PHP_EOL;
     }
 }
