@@ -38,7 +38,7 @@ final class HybridTextNormalizer implements TextNormalizerInterface
                 usedAi: false,
                 model: null,
                 reason: $decision->reason,
-                signals: $decision->signals,
+                factors: $decision->factors,
             );
         }
 
@@ -52,7 +52,7 @@ final class HybridTextNormalizer implements TextNormalizerInterface
                 usedAi: true,
                 model: $response->model,
                 reason: $decision->reason,
-                signals: $decision->signals,
+                factors: $decision->factors,
             );
         } catch (NormalizationException $e) {
             return new NormalizationResult(
@@ -61,7 +61,7 @@ final class HybridTextNormalizer implements TextNormalizerInterface
                 usedAi: false,
                 model: null,
                 reason: 'AI failed, fell back to rule-based normalization: ' . $e->getMessage(),
-                signals: $decision->signals,
+                factors: $decision->factors,
             );
         }
     }

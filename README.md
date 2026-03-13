@@ -53,7 +53,7 @@ TEXT_NORMALIZER_PROVIDER=openai
 TEXT_NORMALIZER_USE_AI=true
 TEXT_NORMALIZER_FORCE_AI=false
 TEXT_NORMALIZER_MIN_AI_LENGTH=120
-TEXT_NORMALIZER_MIN_AMBIGUITY_SIGNALS=2
+TEXT_NORMALIZER_MIN_AMBIGUITY_FACTORS=2
 TEXT_NORMALIZER_MAX_LENGTH_DELTA_RATIO=0.35
 ```
 
@@ -114,7 +114,7 @@ $normalizer = TextNormalizerFactory::fromConfig(
         openAiApiKey: $openAiApiKey,
         openAiModel: 'gpt-4o-mini',
         minAiLength: 120,
-        minAmbiguitySignals: 2,
+        minAmbiguityFactors: 2,
         maxLengthDeltaRatio: 0.35,
     ),
     httpClient: new Client(['timeout' => 30]),
@@ -209,9 +209,9 @@ The package always runs deterministic preprocessing first.
 - AI is enabled
 - the text meets the minimum length
 - the text looks sufficiently damaged
-- enough ambiguity signals are present
+- enough ambiguity factors are present
 
-**Ambiguity signals include:**
+**Ambiguity factors include:**
 
 - suspicious short uppercase tokens such as `US`, `OR`, `IN`
 - acronym patterns like `( MADD )`
@@ -229,7 +229,7 @@ Returned by `$normalizer->normalize()`.
 - `usedAi()` – Returns `true` if AI was used for the final result, otherwise `false`.
 - `model()` – Returns the AI model name used for normalization, or `null` if AI was not used.
 - `reason()` – Returns a short explanation of why AI was or was not used, or why the rule-based result was used as a fallback.
-- `signals()` – Returns the heuristic signals that influenced the AI-escalation decision.
+- `factors()` – Returns the heuristic factors that influenced the AI-escalation decision.
 - `toArray()` – Returns the full result as an associative array.
 
 ### `NormalizationCollectionResult`

@@ -7,7 +7,7 @@ namespace TextNormalizer\Result;
 final class NormalizationResult
 {
     /**
-     * @param list<string> $signals
+     * @param list<string> $factors
      */
     public function __construct(
         private readonly string $original,
@@ -15,7 +15,7 @@ final class NormalizationResult
         private readonly bool $usedAi,
         private readonly ?string $model,
         private readonly string $reason,
-        private readonly array $signals = [],
+        private readonly array $factors = [],
     ) {
     }
 
@@ -47,9 +47,9 @@ final class NormalizationResult
     /**
      * @return list<string>
      */
-    public function signals(): array
+    public function factors(): array
     {
-        return $this->signals;
+        return $this->factors;
     }
 
     /**
@@ -63,7 +63,7 @@ final class NormalizationResult
             'used_ai' => $this->usedAi,
             'model' => $this->model,
             'reason' => $this->reason,
-            'signals' => $this->signals,
+            'factors' => $this->factors,
         ];
     }
 }

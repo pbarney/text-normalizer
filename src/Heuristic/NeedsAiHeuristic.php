@@ -35,40 +35,40 @@ final class NeedsAiHeuristic
             return new NeedsAiDecision(false, 'Text does not appear sufficiently damaged.');
         }
 
-        $signals = [];
+        $factors = [];
 
         if (TextInspector::containsShortUppercaseTokens($original)) {
-            $signals[] = 'short_uppercase_tokens';
+            $factors[] = 'short_uppercase_tokens';
         }
 
         if (TextInspector::containsParentheticalAcronymPattern($original)) {
-            $signals[] = 'parenthetical_acronym';
+            $factors[] = 'parenthetical_acronym';
         }
 
         if (TextInspector::containsBusinessJoiners($original)) {
-            $signals[] = 'business_joiners';
+            $factors[] = 'business_joiners';
         }
 
         if (! empty($context['protected_phrases'])) {
-            $signals[] = 'protected_phrases_context';
+            $factors[] = 'protected_phrases_context';
         }
 
         if (! empty($context['acronyms'])) {
-            $signals[] = 'acronyms_context';
+            $factors[] = 'acronyms_context';
         }
 
         if (TextInspector::isMultiSentence($original)) {
-            $signals[] = 'multi_sentence';
+            $factors[] = 'multi_sentence';
         }
 
-        if (count($signals) < $this->config->minAmbiguitySignals) {
-            return new NeedsAiDecision(false, 'Not enough ambiguity signals.', $signals);
+        if (count($factors) < $this->config->minAmbiguityFactors) {
+            return new NeedsAiDecision(false, 'Not enough ambiguity factors.', $factors);
         }
 
         if ($original === $ruleBased) {
-            $signals[] = 'rule_based_no_change';
+            $factors[] = 'rule_based_no_change';
         }
 
-        return new NeedsAiDecision(true, 'Text is damaged and sufficiently ambiguous.', $signals);
+        return new NeedsAiDecision(true, 'Text is damaged and sufficiently ambiguous.', $factors);
     }
 }
