@@ -125,9 +125,8 @@ $normalizer = TextNormalizerFactory::fromConfig(
 $result = $normalizer->normalize(
     text: 'Whether You Need A Building Demolished OR Want To Rent A Dumpster...',
     context: [
-        'company_name' => 'Fancy Pants Hauling & Dumpster Rental',
         'acronyms' => ['MADD'],
-        'proper_phrases' => ['Topeka', 'Kansas', 'MADD'],
+        'protected_phrases' => ['Fancy Pants Hauling & Dumpster Rental', 'Topeka', 'Kansas'],
     ],
 );
 
@@ -162,9 +161,8 @@ $normalizer = TextNormalizerFactory::fromEnvironment(
 $result = $normalizer->normalize(
     text: 'Whether You Need A Building Demolished OR Want To Rent A Dumpster...',
     context: [
-        'company_name' => 'Fancy Pants Hauling & Dumpster Rental',
         'acronyms' => ['MADD'],
-        'proper_phrases' => ['Topeka', 'Kansas', 'MADD'],
+        'protected_phrases' => ['Fancy Pants Hauling & Dumpster Rental', 'Topeka', 'Kansas'],
     ],
 );
 
@@ -189,9 +187,8 @@ $collectionResult = $normalizer->normalizeCollection(
         103 => 'Fancy Pants Excavating S Project Managers Help To Review And Permit The Plans. Its Concrete Foundation Walls Are Resistant To Fire, Wind, Insects, Decay, Mold And Efflorescence.',
     ],
     context: [
-        'company_name' => 'Fancy Pants Excavating',
         'acronyms' => ['MADD'],
-        'proper_phrases' => ['Topeka', 'Kansas'],
+        'protected_phrases' => ['Fancy Pants Hauling & Dumpster Rental', 'Topeka', 'Kansas'],
     ],
 );
 
@@ -218,8 +215,7 @@ The package always runs deterministic preprocessing first.
 
 - suspicious short uppercase tokens such as `US`, `OR`, `IN`
 - acronym patterns like `( MADD )`
-- company-name signals like `&`, `/`, `-`
-- context fields such as `company_name`, `proper_phrases`, `acronyms`
+- context fields (i.e., `protected_phrases`, `acronyms`)
 - multi-sentence title-cased text
 
 ## Result objects

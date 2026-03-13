@@ -49,12 +49,8 @@ final class NeedsAiHeuristic
             $signals[] = 'business_joiners';
         }
 
-        if (! empty($context['company_name'])) {
-            $signals[] = 'company_name_context';
-        }
-
-        if (! empty($context['proper_phrases'])) {
-            $signals[] = 'proper_phrases_context';
+        if (! empty($context['protected_phrases'])) {
+            $signals[] = 'protected_phrases_context';
         }
 
         if (! empty($context['acronyms'])) {

@@ -45,9 +45,8 @@ $texts = [
 $collectionResult = $normalizer->normalizeCollection(
     texts: $texts,
     context: [
-        'company_name' => 'Fancy Pants Excavating',
+        'protected_phrases' => ['Fancy Pants Excavating', 'Topeka', 'Kansas'],
         'acronyms' => ['MADD'],
-        'proper_phrases' => ['Topeka', 'Kansas'],
     ],
 );
 

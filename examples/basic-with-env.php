@@ -34,9 +34,8 @@ $text = <<<TEXT
 $result = $normalizer->normalize(
     text: $text,
     context: [
-        'company_name' => 'Fancy Pants Excavating',
+        'protected_phrases' => ['Fancy Pants Excavating', 'Topeka', 'Kansas'],
         'acronyms' => ['MADD'],
-        'proper_phrases' => ['Topeka', 'Kansas'],
     ],
 );
 

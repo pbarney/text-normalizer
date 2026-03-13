@@ -18,14 +18,14 @@ final class RuleBasedPreprocessorTest extends TestCase
         self::assertSame('Hello world. This is a test.', $result);
     }
 
-    public function testRestoresKnownAcronymsAndCompanyName(): void
+    public function testRestoresKnownAcronymsAndProtectedContextPhrases(): void
     {
         $preprocessor = new RuleBasedPreprocessor();
 
         $result = $preprocessor->normalize(
             'Fancy Pants hauling & dumpster rental supports madd.',
             [
-                'company_name' => 'Fancy Pants Hauling & Dumpster Rental',
+                'protected_phrases' => 'Fancy Pants Hauling & Dumpster Rental',
                 'acronyms' => ['MADD'],
             ],
         );

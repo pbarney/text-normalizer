@@ -41,9 +41,9 @@ final class RuleBasedPreprocessor
             }
         }
 
-        $properPhrases = $context['proper_phrases'] ?? [];
-        if (is_array($properPhrases)) {
-            foreach ($properPhrases as $phrase) {
+        $protectedPhrases = $context['protected_phrases'] ?? [];
+        if (is_array($protectedPhrases)) {
+            foreach ($protectedPhrases as $phrase) {
                 if (! is_string($phrase) || $phrase === '') {
                     continue;
                 }
@@ -55,12 +55,6 @@ final class RuleBasedPreprocessor
 
                 $text = preg_replace($pattern, $phrase, $text) ?? $text;
             }
-        }
-
-        $companyName = $context['company_name'] ?? null;
-        if (is_string($companyName) && $companyName !== '') {
-            $pattern = '/' . preg_quote(mb_strtolower($companyName), '/') . '/u';
-            $text = preg_replace($pattern, $companyName, $text) ?? $text;
         }
 
         return $text;

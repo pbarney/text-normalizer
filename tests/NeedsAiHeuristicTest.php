@@ -30,12 +30,12 @@ final class NeedsAiHeuristicTest extends TestCase
             'Whether You Need A Building Demolished OR Want To Rent A Dumpster For A Cleanup, Fancy Pants Hauling & Dumpster Rental Is The Company For You.',
             'Whether you need a building demolished or want to rent a dumpster for a cleanup, Fancy Pants Hauling & Dumpster Rental is the company for you.',
             [
-                'company_name' => 'Fancy Pants Hauling & Dumpster Rental',
+                'protected_phrases' => 'Fancy Pants Hauling & Dumpster Rental',
                 'acronyms' => ['MADD'],
             ],
         );
 
         self::assertTrue($decision->shouldUseAi);
-        self::assertContains('company_name_context', $decision->signals);
+        self::assertContains('protected_phrases_context', $decision->signals);
     }
 }

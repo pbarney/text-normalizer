@@ -39,16 +39,12 @@ final class OpenAiAiNormalizer implements AiNormalizerInterface
     {
         $contextLines = [];
 
-        if (! empty($context['company_name']) && is_string($context['company_name'])) {
-            $contextLines[] = 'Company name: ' . $context['company_name'];
-        }
-
         if (! empty($context['acronyms']) && is_array($context['acronyms'])) {
             $contextLines[] = 'Known acronyms: ' . implode(', ', array_filter($context['acronyms'], 'is_string'));
         }
 
-        if (! empty($context['proper_phrases']) && is_array($context['proper_phrases'])) {
-            $contextLines[] = 'Known proper phrases: ' . implode(', ', array_filter($context['proper_phrases'], 'is_string'));
+        if (! empty($context['protected_phrases']) && is_array($context['protected_phrases'])) {
+            $contextLines[] = 'Known protected phrases: ' . implode(', ', array_filter($context['protected_phrases'], 'is_string'));
         }
 
         $contextBlock = $contextLines === []
@@ -63,6 +59,7 @@ Rules:
 - Do not summarize.
 - Do not add facts.
 - Preserve acronyms and proper names when reasonably inferable.
+- Preserve any phrases and acronyms listed in Context exactly.
 - Return only the normalized text.
 
 Context:
