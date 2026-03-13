@@ -12,6 +12,30 @@ A configurable PHP 8.2+ package for normalizing damaged or poorly capitalized te
 - environment-driven configuration
 - rich result objects with convenience methods
 
+## Examples
+
+### Example 1: A poorly-OCR'd mid-19th century person correspondence
+
+**Input text:**
+
+> My Esteem d Sister, I Take This Occasn To Inform You That I Recd. Your Last Of The 9th Ult., Though Much Of It Was So Faint & Blur d In The Fold As To Be Scarccly Legible, Esply. Where You Spoke Of Aunt Deborah S Illness And The Matter Of The Lease Near Mill Creek. We Came On To Harpers Ferry By Way Of Martinsbg. Under A Cold Rain, And Lodg d At The House Of Mrs. Bell, Who Says The Old Genl. Harwood Was Seen There On Tuesdy Last, Altho Some Maintain It Was His Nephew, Mr. H. L. Harrod, The Names Being Much Confus d In The Regster. I Was Yesterday At St. Matthew s Yard, Where A Stone, Half Sunken & Blacken d, Bore What I Took To Be The Name Of Edwd. L. Farnham, Yet The Sexton Read It As E. T. Farring, And Could Not Resolve The Date Whether 1817 Or 1847, The Figure Being Cloven Quite Away. There Is Likewise Much Talk Of A Packet Mis-sent To the Office At Fredk., Marked For Dr. Elias Wren, Containing Notes On Qu1nine, Lmp Oyl, Astron. Glass, & Sundry Instruments, But The Clerk S Memorandm Is So Torn At The Edge That No Man Can Say If The Sum Enter d Was 71 Dollars, 7l, Or 7?. Pray Tell Cousin Marian I Have Not Forgot Her Desire For The Little Volume Of Cowper, Though The Bookseller In Georgetn. Had Only A Worn Copy Wanting Its Title Page. I Remain Yr. Affecte Brother, Jos. C. Wetherell.
+
+**Normalized output (using no contextual clues)**
+
+> My Esteemed Sister, I take this occasion to inform you that I received your last of the 9th ult., though much of it was so faint and blurred in the fold as to be scarcely legible, especially where you spoke of Aunt Deborah's illness and the matter of the lease near Mill Creek. We came on to Harpers Ferry by way of Martinsburg under a cold rain, and lodged at the house of Mrs. Bell, who says the old General Harwood was seen there on Tuesday last, although some maintain it was his nephew, Mr. H. L. Harrod, the names being much confused in the register. I was yesterday at St. Matthew's Yard, where a stone, half sunken and blackened, bore what I took to be the name of Edward L. Farnham, yet the sexton read it as E. T. Farring, and could not resolve the date whether 1817 or 1847, the figure being cloven quite away. There is likewise much talk of a packet missent to the office at Frederick, marked for Dr. Elias Wren, containing notes on quinine, lamp oil, astronomical glass, and sundry instruments, but the clerk's memorandum is so torn at the edge that no man can say if the sum entered was 71 dollars, 71, or 7?. Pray tell Cousin Marian I have not forgot her desire for the little volume of Cowper, though the bookseller in Georgetown had only a worn copy wanting its title page. I remain your affectionate brother, Jos. C. Wetherell.
+
+### Example 2: A heavily damaged late-18th century ship's log
+
+**Input text:**
+
+> At 4 Bells In The Forenoon Watch, Lat. Suppos d 3I° 4O' N., Long. By Dead Reckng. 72° I5' W., We Made Poor Headway Under Reef d Tops ls, The Wind Hauling Sudden ly To E.N.E. With A Cross Sea That Struck The Larbd. Quarter So Hard As To Stove One Of The Quarter-Boats And Carry Away Part Of The Rail Near Capt. Wetherby S Companion. Mr. Elias Boone, 1st Mate, Reports The Lead Gave No Bottom At 85 Fathms., Though The Previous Nights Entry Seems To Mark Soundings At 45, Which I Suspect To Be A Clerks Error, The Figure 8 Having Been Mistook For 4 In More Places Than One. At Noon We Sighted, Or Thought We Sighted, A Low Dark Line To The S.S.W., Which Old Jenks Took For Cape Hatteras, But Mr. Boone Maintaind It Was No More Than Fog Bank & Broken Light. Issued To The Hands Salt Beef, Biscuit, & A Gill Of Rum Per Man, Save For Young T. Mercer, Laid Up Since Yestdy. With A Cramp In The Chest After Going Aloft In Rain. The Surgeons Memorandm Mentions Jesuits Bark, Lamp Oyl, & Vinegr., But The Purser S List Is So Blurr d At The Fold That I Cannot Tell Whether The Remaining Flour Is 17 Bbls. Or 7I. At Dog Watch A Small Packet, Mark d For The Admiralty Office At Norfolk, Was Found Damp Through, Its Seal Half Gone, And The Name Upon It Read By One Hand As Lt. Horatio Vale, By Another As H. Yale.
+
+**Normalized output (using no contextual clues)**
+
+> At 4 bells in the forenoon watch, lat. suppos’d 31° 40' N., long. by dead reckoning 72° 15' W., we made poor headway under reefed topsails, the wind hauling suddenly to E.N.E. with a cross sea that struck the larboard quarter so hard as to stove one of the quarter-boats and carry away part of the rail near Capt. Wetherby's companion, Mr. Elias Boone, 1st mate. Reports the lead gave no bottom at 85 fathoms, though the previous night's entry seems to mark soundings at 45, which I suspect to be a clerk's error, the figure 8 having been mistook for 4 in more places than one. At noon, we sighted, or thought we sighted, a low dark line to the S.S.W., which Old Jenks took for Cape Hatteras, but Mr. Boone maintained it was no more than a fog bank and broken light. Issued to the hands salt beef, biscuit, and a gill of rum per man, save for young T. Mercer, laid up since yesterday with a cramp in the chest after going aloft in rain. The surgeon's memorandum mentions Jesuit's bark, lamp oil, and vinegar, but the purser's list is so blurred at the fold that I cannot tell whether the remaining flour is 17 bbls. or 71. At dog watch, a small packet, marked for the Admiralty Office at Norfolk, was found damp through, its seal half gone, and the name upon it read by one hand as Lt. Horatio Vale, by another as H. Yale.
+
+Contextual clues are known difficult words, usually proper names of people and locations, or acronyms that may not be obivious from the inferred context.
+
 ## Installation
 
 ```bash
