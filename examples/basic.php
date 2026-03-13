@@ -37,15 +37,23 @@ $normalizer = TextNormalizerFactory::fromConfig(
 );
 
 $text = <<<TEXT
-    Fancy Pants Excavating Provides A Variety Of Home And Garden Services. The Company Specializes IN Various Concrete Wall Designs Has Ability To Resist Soil And Water Pressure And Construction Loads. Its Concrete Foundation Walls Are Resistant To Fire, Wind, Insects, Decay, Mold And Efflorescence. Fancy Pants Excavating S Walls Are Available IN Several Shapes, Including Curved And Angled. The Company S Project Managers Help To Review And Permit The Plans. It Offers Various Flatworks For Sidewalks, Driveways, Patios, Garage Floors And Porches. Fancy Pants Excavating Also Provides Services To Protect Investment Such As Power Washing And Sealing Concrete. We support MADD. The Company Is Located IN Topeka, Kansas.
+    My Esteem d Sister, I Take This Occasn To Inform You That I Recd. Your Last Of The 9th Ult., Though Much Of It Was So Faint & Blur d In The Fold As To Be Scarccly Legible, Esply. Where You Spoke Of Aunt Deborah S Illness And The Matter Of The Lease Near Mill Creek. We Came On To Harpers Ferry By Way Of Martinsbg. Under A Cold Rain, And Lodg d At The House Of Mrs. Bell, Who Says The Old Genl. Harwood Was Seen There On Tuesdy Last, Altho Some Maintain It Was His Nephew, Mr. H. L. Harrod, The Names Being Much Confus d In The Regster. I Was Yesterday At St. Matthew s Yard, Where A Stone, Half Sunken & Blacken d, Bore What I Took To Be The Name Of Edwd. L. Farnham, Yet The Sexton Read It As E. T. Farring, And Could Not Resolve The Date Whether 1817 Or 1847, The Figure Being Cloven Quite Away. There Is Likewise Much Talk Of A Packet Mis-sent To the Office At Fredk., Marked For Dr. Elias Wren, Containing Notes On Qu1nine, Lmp Oyl, Astron. Glass, & Sundry Instruments, But The Clerk S Memorandm Is So Torn At The Edge That No Man Can Say If The Sum Enter d Was 71 Dollars, 7l, Or 7?. Pray Tell Cousin Marian I Have Not Forgot Her Desire For The Little Volume Of Cowper, Though The Bookseller In Georgetn. Had Only A Worn Copy Wanting Its Title Page. I Remain Yr. Affecte Brother, Jos. C. Wetherell.
     TEXT;
 
+$context = [
+	'protected_phrases' => [
+    "Mill Creek",
+    "Harpers Ferry",
+    "Martinsburg",
+    "St. Matthew's Yard",
+    "Georgetown",
+	],
+	'acronyms' => [],    
+];
+    
 $result = $normalizer->normalize(
     text: $text,
-    context: [
-        'protected_phrases' => ['Fancy Pants Excavating', 'Topeka', 'Kansas'],
-        'acronyms' => ['MADD'],
-    ],
+    context: $context,
 );
 
 printf(
