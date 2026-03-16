@@ -228,19 +228,33 @@ For a full example, see `examples/collection.php`.
 
 The package always runs deterministic preprocessing first.
 
-**AI is used only if:**
+**AI is considered only if:**
 
 - AI is enabled
 - the text meets the minimum length
-- the text looks sufficiently damaged
+- the text appears sufficiently damaged
 - enough ambiguity factors are present
+
+**A text is considered sufficiently damaged if either:**
+
+- it appears heavily title-cased, or
+- it matches at least two OCR-style damage factors
+
+**OCR-style damage factors include:**
+
+- digit/letter confusion such as `qu1nine`, `3ist`, or `N0`
+- broken possessives or contractions such as `Company S` or `Wasn T`
+- split-word artifacts such as `arriv d`, `sudden ly`, or `them selves`
+- uncertain numeric artifacts such as `4?0` or `7?`
 
 **Ambiguity factors include:**
 
 - suspicious short uppercase tokens such as `US`, `OR`, `IN`
 - acronym patterns like `( MADD )`
-- context fields (i.e., `protected_phrases`, `acronyms`)
-- multi-sentence title-cased text
+- context fields such as `protected_phrases` and `acronyms`
+- multi-sentence text
+
+In short, the package uses AI only when the text looks both damaged enough and ambiguous enough that deterministic cleanup alone may not be sufficient.
 
 ## Result objects
 
