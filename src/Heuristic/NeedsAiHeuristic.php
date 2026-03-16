@@ -31,37 +31,73 @@ final class NeedsAiHeuristic
             return new NeedsAiDecision(false, 'Text shorter than AI threshold.');
         }
 
-        if (! TextInspector::looksDamagedTitleCase($original)) {
-            return new NeedsAiDecision(false, 'Text does not appear sufficiently damaged.');
+        $damageFactors = [];
+        $ocrDamageFactors = [];
+        $ambiguityFactors = [];
+
+        if (TextInspector::looksDamagedTitleCase($original)) {
+            $damageFactors[] = 'title_case_damage';
         }
 
-        $factors = [];
+        if (TextInspector::containsDigitLetterConfusion($original)) {
+            $damageFactors[] = 'digit_letter_confusion';
+            $ocrDamageFactors[] = 'digit_letter_confusion';
+        }
+
+        if (TextInspector::containsBrokenPossessiveOrContraction($original)) {
+            $damageFactors[] = 'broken_possessive_or_contraction';
+            $ocrDamageFactors[] = 'broken_possessive_or_contraction';
+        }
+
+        if (TextInspector::containsSplitWordArtifact($original)) {
+            $damageFactors[] = 'split_word_artifact';
+            $ocrDamageFactors[] = 'split_word_artifact';
+        }
+
+        if (TextInspector::containsUncertainNumericArtifact($original)) {
+            $damageFactors[] = 'uncertain_numeric_artifact';
+            $ocrDamageFactors[] = 'uncertain_numeric_artifact';
+        }
+
+        $hasSufficientDamage =
+            in_array('title_case_damage', $damageFactors, true)
+            || count($ocrDamageFactors) >= 2;
+
+        if (! $hasSufficientDamage) {
+            return new NeedsAiDecision(
+                false,
+                'Text does not appear sufficiently damaged.',
+                $damageFactors,
+            );
+        }
 
         if (TextInspector::containsShortUppercaseTokens($original)) {
-            $factors[] = 'short_uppercase_tokens';
+            $ambiguityFactors[] = 'short_uppercase_tokens';
         }
 
         if (TextInspector::containsParentheticalAcronymPattern($original)) {
-            $factors[] = 'parenthetical_acronym';
+            $ambiguityFactors[] = 'parenthetical_acronym';
         }
 
         if (TextInspector::containsBusinessJoiners($original)) {
-            $factors[] = 'business_joiners';
+            $ambiguityFactors[] = 'business_joiners';
         }
 
         if (! empty($context['protected_phrases'])) {
-            $factors[] = 'protected_phrases_context';
+            $ambiguityFactors[] = 'protected_phrases_context';
         }
 
         if (! empty($context['acronyms'])) {
-            $factors[] = 'acronyms_context';
+            $ambiguityFactors[] = 'acronyms_context';
         }
 
         if (TextInspector::isMultiSentence($original)) {
-            $factors[] = 'multi_sentence';
+            $ambiguityFactors[] = 'multi_sentence';
         }
 
-        if (count($factors) < $this->config->minAmbiguityFactors) {
+        $factors = array_values(array_unique([...$damageFactors, ...$ambiguityFactors]));
+
+        if (count($ambiguityFactors) < $this->config->minAmbiguityFactors) {
             return new NeedsAiDecision(false, 'Not enough ambiguity factors.', $factors);
         }
 

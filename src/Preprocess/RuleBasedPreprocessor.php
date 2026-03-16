@@ -49,9 +49,9 @@ final class RuleBasedPreprocessor
                 }
 
                 $lowerPhrase = mb_strtolower($phrase);
-                $pattern = preg_match('/\s/u', $phrase) === 1
-                    ? '/' . preg_quote($lowerPhrase, '/') . '/u'
-                    : '/\b' . preg_quote($lowerPhrase, '/') . '\b/u';
+                $pattern = preg_match('/\s/iu', $phrase) === 1
+                    ? '/' . preg_quote($lowerPhrase, '/') . '/iu'
+                    : '/\b' . preg_quote($lowerPhrase, '/') . '\b/iu';
 
                 $text = preg_replace($pattern, $phrase, $text) ?? $text;
             }

@@ -25,7 +25,7 @@ final class RuleBasedPreprocessorTest extends TestCase
         $result = $preprocessor->normalize(
             'Fancy Pants hauling & dumpster rental supports madd.',
             [
-                'protected_phrases' => 'Fancy Pants Hauling & Dumpster Rental',
+                'protected_phrases' => ['Fancy Pants Hauling & Dumpster Rental'],
                 'acronyms' => ['MADD'],
             ],
         );
